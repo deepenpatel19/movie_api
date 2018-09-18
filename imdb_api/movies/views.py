@@ -10,9 +10,9 @@ from .models import Movie, Genres
 
 class MovieData(View):
 
-    # @method_decorator(csrf_exempt)
-    # def dispatch(self, request, *args, **kwargs):
-    #     return super(MovieData, self).dispatch(request, *args, **kwargs)
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(MovieData, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, pk=None):
         queryset = Movie.objects.all().prefetch_related()
@@ -22,8 +22,8 @@ class MovieData(View):
             for i in queryset:
                 data = model_to_dict(i)
                 data['genres_movie'] = list()
-                for d in i.genres_movie.all():
-                    data['genres_movie'].append(model_to_dict(d))
+                for d in i.genres_movie.values('name'):
+                    data['genres_movie'].append(d.get('name'))
                 main_json.append(data)
             print(main_json)
             result = {
@@ -39,11 +39,8 @@ class MovieData(View):
     # def post(self, request):
     #     pass
 
-    def delete(self, request):
-        body_data = request.data
-        # movie = self.get_object(body_data.get('title'))
-        # movie.delete()
-        queryset = Movie.objects.get(title=body_data.get('title'))
+    def delete(self, request, *args, **kwargs):
+        queryset = Movie.objects.get(id=kwargs.get('pk'))
         if queryset:
             queryset.delete()
             response = {
@@ -87,6 +84,34 @@ class MovieData(View):
             }
             return JsonResponse(response, status=204)
 
+    def put(self, request, *args, **kwargs):
+        if Movie.objects.filter(id=kwargs.get('pk')):
+            body_data = json.loads(request.body)
+            if body_data.get('rating'):
+                query_set = Movie.objects.filter(id=kwargs.get('pk')).update(rating=body_data.get('rating'))
+                response = {
+                    'message': 'data updated'
+                }
+                return JsonResponse(response, status=200)
+            elif body_data.get('genres'):
+                if isinstance(body_data.get('genres'), list):
+                    for i in body_data.get('genres'):
+                        query_set = Genres.objects.filter(movie_id=kwargs.get('pk')).update(name=i)
+                response = {
+                    'message': 'data updated'
+                }
+                return JsonResponse(response, status=200)
+            else:
+                response = {
+                    'message': 'wrong data to update.'
+                }
+                return JsonResponse(response, status=204)
+        else:
+            response = {
+                'message': 'movie not found'
+            }
+            return JsonResponse(response, status=204)
+
 
 class MovieTitleSearch(View):
 
@@ -102,8 +127,8 @@ class MovieTitleSearch(View):
                 for i in queryset:
                     data = model_to_dict(i)
                     data['genres_movie'] = list()
-                    for d in i.genres_movie.all():
-                        data['genres_movie'].append(model_to_dict(d))
+                    for d in i.genres_movie.values('name'):
+                        data['genres_movie'].append(d.get('name'))
                     main_json.append(data)
                 print(main_json)
                 response = {
@@ -116,11 +141,12 @@ class MovieTitleSearch(View):
                 if response.status_code == 200:
                     raw_data = json.loads(response.text)
                     # raw_data if len(raw_data) > 1 else
-                    # print(raw_data)
+                    print(raw_data)
                     body_data = {
                         'title': raw_data.get('Title'),
                         'released_year': raw_data.get('Released')[-4:],
                         'rating': raw_data.get('imdbRating'),
+                        'imdb_id': raw_data.get('imdbID'),
                         'genres': raw_data.get('Genre').split(',') if raw_data.get('Genre') else []
                     }
                     # print(body_data)
@@ -164,8 +190,8 @@ class MovieSearch(View):
                 for i in queryset:
                     data = model_to_dict(i)
                     data['genres_movie'] = list()
-                    for d in i.genres_movie.all():
-                        data['genres_movie'].append(model_to_dict(d))
+                    for d in i.genres_movie.values('name'):
+                        data['genres_movie'].append(d.get('name'))
                     main_json.append(data)
                 print(main_json)
             elif request.GET.get('search_field') == 'year':
@@ -187,8 +213,8 @@ class MovieSearch(View):
                 for i in queryset:
                     data = model_to_dict(i)
                     data['genres_movie'] = list()
-                    for d in i.genres_movie.all():
-                        data['genres_movie'].append(model_to_dict(d))
+                    for d in i.genres_movie.values('name'):
+                        data['genres_movie'].append(d.get('name'))
                     main_json.append(data)
                 print(main_json)
             elif request.GET.get('search_field') == 'rating':
@@ -208,8 +234,8 @@ class MovieSearch(View):
                 for i in queryset:
                     data = model_to_dict(i)
                     data['genres_movie'] = list()
-                    for d in i.genres_movie.all():
-                        data['genres_movie'].append(model_to_dict(d))
+                    for d in i.genres_movie.values('name'):
+                        data['genres_movie'].append(d.get('name'))
                     main_json.append(data)
                 print(main_json)
             elif request.GET.get('search_field') in fields_name:
@@ -223,10 +249,24 @@ class MovieSearch(View):
                 for i in queryset:
                     data = model_to_dict(i)
                     data['genres_movie'] = list()
-                    for d in i.genres_movie.all():
-                        data['genres_movie'].append(model_to_dict(d))
+                    for d in i.genres_movie.values('name'):
+                        data['genres_movie'].append(d.get('name'))
                     main_json.append(data)
-                print(main_json)
+                # print(main_json)
+            elif request.GET.get('search_field') == 'genres':
+                query_args = {
+                    'name__icontains': request.GET.get('search_term')
+                }
+                queryset = Genres.objects.filter(**query_args).select_related()
+                # print(queryset)
+                main_json = list()
+                for i in queryset:
+                    data = model_to_dict(i.movie)
+                    main_json.append(data)
+                response = {
+                    'message': main_json
+                }
+                return JsonResponse(response, status=200)
             else:
                 response = {
                     'message': 'Field name not matched.'

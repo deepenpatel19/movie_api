@@ -1,0 +1,405 @@
+{
+	"variables": [],
+	"info": {
+		"name": "movie_api",
+		"_postman_id": "1744693a-2530-62d8-709b-75cd209d673b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "127.0.0.1:8000/movies/search_title?title=avengers",
+			"request": {
+				"url": {
+					"raw": "127.0.0.1:8000/movies/search_title?title=avengers",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"movies",
+						"search_title"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "avengers",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Test\",\n\t\"rating\":\"3\",\n\t\"genres\":[\"Comedy\", \"Thriller\"],\n\t\"released_year\":\"2017\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:8000/movies/",
+			"request": {
+				"url": "127.0.0.1:8000/movies/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Test\",\n\t\"rating\":\"3\",\n\t\"genres\":[\"Comedy\", \"Thriller\"],\n\t\"released_year\":\"2017\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:8000/movies/search?search_field=year&search_term=2018-2018",
+			"request": {
+				"url": {
+					"raw": "127.0.0.1:8000/movies/search?search_field=year&search_term=2018-2018",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"movies",
+						"search"
+					],
+					"query": [
+						{
+							"key": "search_field",
+							"value": "year",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "search_term",
+							"value": "2018-2018",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Test\",\n\t\"rating\":\"3\",\n\t\"genres\":[\"Comedy\", \"Thriller\"],\n\t\"released_year\":\"2017\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:8000/movies/search?search_field=rating&search_term=4&condition=higher",
+			"request": {
+				"url": {
+					"raw": "127.0.0.1:8000/movies/search?search_field=rating&search_term=4&condition=higher",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"movies",
+						"search"
+					],
+					"query": [
+						{
+							"key": "search_field",
+							"value": "rating",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "search_term",
+							"value": "4",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "condition",
+							"value": "higher",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Test\",\n\t\"rating\":\"3\",\n\t\"genres\":[\"Comedy\", \"Thriller\"],\n\t\"released_year\":\"2017\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:8000/movies/",
+			"request": {
+				"url": "127.0.0.1:8000/movies/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Test\",\n\t\"rating\":\"3\",\n\t\"genres\":[\"Comedy\", \"Thriller\"],\n\t\"released_year\":\"2017\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:8000/movies/2/",
+			"request": {
+				"url": "127.0.0.1:8000/movies/2/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Test\",\n\t\"rating\":\"3\",\n\t\"genres\":[\"Comedy\", \"Thriller\"],\n\t\"released_year\":\"2017\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:8000/movies/search?search_field=rating&search_term=4&condition=lower",
+			"request": {
+				"url": {
+					"raw": "127.0.0.1:8000/movies/search?search_field=rating&search_term=4&condition=lower",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"movies",
+						"search"
+					],
+					"query": [
+						{
+							"key": "search_field",
+							"value": "rating",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "search_term",
+							"value": "4",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "condition",
+							"value": "lower",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Test\",\n\t\"rating\":\"3\",\n\t\"genres\":[\"Comedy\", \"Thriller\"],\n\t\"released_year\":\"2017\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:8000/movies/search?search_field=genres&search_term=comedy",
+			"request": {
+				"url": {
+					"raw": "127.0.0.1:8000/movies/search?search_field=genres&search_term=comedy",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"movies",
+						"search"
+					],
+					"query": [
+						{
+							"key": "search_field",
+							"value": "genres",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "search_term",
+							"value": "comedy",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Test\",\n\t\"rating\":\"3\",\n\t\"genres\":[\"Comedy\", \"Thriller\"],\n\t\"released_year\":\"2017\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:8000/movies/search?search_field=genres&search_term=action",
+			"request": {
+				"url": {
+					"raw": "127.0.0.1:8000/movies/search?search_field=genres&search_term=action",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"movies",
+						"search"
+					],
+					"query": [
+						{
+							"key": "search_field",
+							"value": "genres",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "search_term",
+							"value": "action",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Test\",\n\t\"rating\":\"3\",\n\t\"genres\":[\"Comedy\", \"Thriller\"],\n\t\"released_year\":\"2017\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:8000/movies/update/5/",
+			"request": {
+				"url": "127.0.0.1:8000/movies/update/5/",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Test\",\n\t\"released_year\":\"2017\",\n\t\"genres\": [\"COmedy\"]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:8000/movies/update/4/",
+			"request": {
+				"url": "127.0.0.1:8000/movies/update/4/",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Test\",\n\t\"released_year\":\"2017\",\n\t\"genres\": [\"COmedy\"]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
